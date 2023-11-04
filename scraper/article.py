@@ -15,6 +15,7 @@ class ArticleNPK: # NPK = No Primary Key, See database schema
     header_image_attribution: str | None
     source_domain: str
     sorted_categories: dict[str, list[str]]
+    original_url: str
     content: str # Can be "<< not yet generated >>"
 
     def generate_cheesy_title_prompt(self):
