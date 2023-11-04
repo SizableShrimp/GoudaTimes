@@ -5,21 +5,25 @@ from selenium.webdriver.support import expected_conditions as EC
 from bs4 import BeautifulSoup
 import codecs
 import re
+import sys
 from webdriver_manager.chrome import ChromeDriverManager
 
 def createDriver() -> webdriver.Chrome:
-	driver = webdriver.Chrome(
-		service=Service(ChromeDriverManager().install())
-	)
-	return driver
+    driver = webdriver.Chrome(
+        service=Service(ChromeDriverManager().install())
+    )
+    return driver
 
 def renderAndCreateParser(url: str) -> BeautifulSoup:
-	driver = createDriver()
-	wait = WebDriverWait(driver, 10)
-	driver.get(url)
-	get_url = driver.current_url
-	wait.until(EC.url_to_be(url))
-	return BeautifulSoup(driver.page_source, features="html.parser")
+    driver = createDriver()
+    wait = WebDriverWait(driver, 10)
+    driver.get(url)
+    get_url = driver.current_url
+    print("waiting...", end="")
+    sys.stdout.flush()
+    wait.until(EC.url_to_be(url))
+    print("done")
+    return BeautifulSoup(driver.page_source, features="html.parser")
 
-soup = renderAndCreateParser("https://example.com")
+soup = renderAndCreateParser("http://example.com/")
 print(soup)
