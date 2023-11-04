@@ -1,0 +1,12 @@
+plugins {
+    id 'java'
+}
+
+group = 'me.sizableshrimp.thecheesytimes'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {}
