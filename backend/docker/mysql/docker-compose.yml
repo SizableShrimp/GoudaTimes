@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+  mysql:
+    image: mysql:8.0.35-debian
+    container_name: mysql
+    restart: unless-stopped
+    env_file:
+      - passwords.env
+    ports:
+      - target: 3306
+        published: 52355
+        protocol: tcp
+        mode: host
+    command: --init-file /data/application/init.sql
+    volumes:
+      # Hosted on the server & on Notion
+      - /home/cheddar/init.sql:/data/application/init.sql:rw
+      # Hosted on the server
+      - thecheesytimes-db:/var/lib/mysql
+      # Secrets
+      - /home/cheddar/secrets/mysql_user_password.txt:/run/secrets/mysql_user_password:rw
+      - /home/cheddar/secrets/mysql_root_password.txt:/run/secrets/mysql_root_password:rw
+
+volumes:
+  thecheesytimes-db:
