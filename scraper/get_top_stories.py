@@ -41,4 +41,12 @@ def get_top_stories() -> list[ArticleNPK]:
     return ret
 
 if __name__ == "__main__":
-    print(get_top_stories())
+    print("~> Loading top stories...", end="", flush=True)
+    top_stories = get_top_stories()
+    print("done.")
+    for article in top_stories:
+        print(f"~> Cheesifying \"{article.title}\"...", end="", flush=True)
+        article.cheesify()
+        print("done.")
+        print(article)
+        break
