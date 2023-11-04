@@ -15,12 +15,12 @@ services:
     command: --init-file /data/application/init.sql
     volumes:
       # Hosted on the server & on Notion
-      - /home/cheddar/init.sql:/data/application/init.sql:rw
+      - /home/cheddar/init.sql:/data/application/init.sql:ro
       # Hosted on the server
       - thecheesytimes-db:/var/lib/mysql
       # Secrets
-      - /home/cheddar/secrets/mysql_user_password.txt:/run/secrets/mysql_user_password:rw
-      - /home/cheddar/secrets/mysql_root_password.txt:/run/secrets/mysql_root_password:rw
+      - /home/cheddar/secrets/mysql_user_password.txt:/run/secrets/mysql_user_password:ro
+      - /home/cheddar/secrets/mysql_root_password.txt:/run/secrets/mysql_root_password:ro
 
 volumes:
   thecheesytimes-db:
