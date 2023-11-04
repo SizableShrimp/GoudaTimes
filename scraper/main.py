@@ -2,6 +2,7 @@ import requests as req
 import os
 
 from article import ArticleNPK
+from articles_db import ArticlesDb
 
 nyt_api_key = os.environ["NYT_DEV_API_KEY"]
 
@@ -36,11 +37,15 @@ def get_top_stories() -> list[ArticleNPK]:
                 for k, v in result.items()
                 if k.endswith("_facet") and (k in nytimes_facet_names)
             },
+            result["url"],
             "<< not yet generated >>",
         ))
     return ret
 
 if __name__ == "__main__":
+    print("~> Setting up database connection...", end="", flush=True)
+    db = ArticlesDb("already_processed.pkl")
+    print("done.")
     print("~> Loading top stories...", end="", flush=True)
     top_stories = get_top_stories()
     print("done.")
@@ -48,5 +53,7 @@ if __name__ == "__main__":
         print(f"~> Cheesifying \"{article.title}\"...", end="", flush=True)
         article.cheesify()
         print("done.")
-        print(article)
+        print(f"~> Adding \"{article.title}\" to db...", end="", flush=True)
+        db.add_article(article, )
+        print("done.")
         break
