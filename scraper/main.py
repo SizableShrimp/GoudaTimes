@@ -49,14 +49,14 @@ if __name__ == "__main__":
     print("~> Loading top stories...", end="", flush=True)
     top_stories = get_top_stories()
     print("done.")
-    for article in top_stories:
+    for i, article in enumerate(top_stories):
+        print(f"~> Processing article {i+1}/{len(top_stories)}.")
         print(f"~> Cheesifying \"{article.title}\"...", end="", flush=True)
         article.cheesify()
         print("done.")
         print(f"~> Adding \"{article.title}\" to db...", end="", flush=True)
         db.add_article(article, recreate=True)
         print("done.")
-        break
     print(f"~> Cleaning up database connection...", end="", flush=True)
     db.cleanup()
     print("done.")
