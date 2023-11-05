@@ -1,5 +1,6 @@
 import openai
 import os
+from datetime import datetime
 
 from article import ArticleNPK
 from articles_db import ArticlesDb
@@ -64,6 +65,7 @@ def generate_dark_article() -> ArticleNPK:
     return ArticleNPK(
         title,
         "<< not available >>",
+        datetime.now().isoformat()[:10],
         None,
         None,
         "By an anonymous depressed cheesemonger",
