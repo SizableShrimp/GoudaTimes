@@ -31,7 +31,9 @@ class ArticleNPK: # NPK = No Primary Key, See database schema
                     I will give you information about a news article.
                     You will rewrite the title to be about cheese.
                     It must also reference the categories given.
-                    Only respond with the title.
+                    No matter what, only respond with the title.
+                    Do not respond with categories, an abstract, or anything else.
+                    Give only a title.
                     """.strip(),
                 },
                 {
@@ -60,8 +62,9 @@ class ArticleNPK: # NPK = No Primary Key, See database schema
                     I will give the title and some other information about a news article.
                     Write the article.
                     It should be about cheese, but should also reference the categories given.
-                    Only respond with the content of the article.
+                    No matter what, only respond with the content of the article.
                     Do not respond with the title, categories, an abstract, or anything else.
+                    Give only the article content.
                     """.strip(),
                 },
                 {
