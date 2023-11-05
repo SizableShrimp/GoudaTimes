@@ -2,11 +2,16 @@ version: "3.9"
 
 services:
   spring-boot:
-    image: thecheesytimes-backend:latest
+    image: eclipse-temurin:17-jdk-alpine
     container_name: spring-boot
     restart: unless-stopped
+    command: java -jar spring-boot.jar
     ports:
       - target: 8081
         published: 8081
         protocol: tcp
         mode: host
+    volumes:
+      - /home/cheddar/spring-boot.jar:/spring-boot.jar
+      # Holds spring.datasource.password
+      - /home/cheddar/secrets/mysql_user_password.txt:/spring/config/spring/datasource/password:ro
