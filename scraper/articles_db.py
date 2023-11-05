@@ -7,10 +7,7 @@ from dataclasses import asdict
 
 from article import ArticleNPK
 
-def actually_hash(s: str) -> bytes:
-    hasher = hashlib.sha256()
-    hasher.update(s.encode('utf-8'))
-    return hasher.digest()
+from actually_hash import actually_hash
 
 class ArticlesDb:
     def __init__(self, already_processed_filename: str):

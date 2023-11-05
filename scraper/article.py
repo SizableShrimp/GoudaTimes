@@ -18,6 +18,7 @@ class ArticleNPK: # NPK = No Primary Key, See database schema
     sorted_categories: dict[str, list[str]]
     original_url: str
     content: str # Can be "<< not yet generated >>"
+    skip_cheesify: bool = False
 
     def generate_cheesy_title_prompt(self):
         return f"Title: {self.title}\nAbstract: {self.nofield_abstract}\nCategories: {self.sorted_categories}"
@@ -73,7 +74,7 @@ class ArticleNPK: # NPK = No Primary Key, See database schema
                 }
             ],
             temperature=1,
-            max_tokens=256,
+            max_tokens=1000,
             top_p=1,
             frequency_penalty=0,
             presence_penalty=0
@@ -87,6 +88,8 @@ class ArticleNPK: # NPK = No Primary Key, See database schema
         self.title = self.title.split('\n')[0]
 
     def cheesify(self):
+        if skip_cheesify:
+            return
         print("[[t", end="", flush=True)
         self.generate_cheesy_title()
         print("]", end="", flush=True)
