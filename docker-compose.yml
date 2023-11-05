@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  node:
+    image: "node:21-bullseye"
+    user: "node"
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - /home/chez/node:/home/node/app
+    command: "npm start"
+
+networks:
+  default:
+    name: "nginx_internal"
+    external: true
