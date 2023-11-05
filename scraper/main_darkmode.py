@@ -66,23 +66,24 @@ def generate_dark_article() -> ArticleNPK:
         title,
         "<< not available >>",
         datetime.now().isoformat()[:10],
-        None,
-        None,
         "By an anonymous depressed cheesemonger",
+        None,
+        None,
         "darkmode._",
         "{}",
         f"https://chat.openai.com?_darkmodearticletitle={actually_hash(title)}",
         content,
+        skip_cheesify=True,
     )
 
 if __name__ == "__main__":
     print("~> Setting up database connection...", end="", flush=True)
-    #db = ArticlesDb("already_processed.pkl")
+    db = ArticlesDb("already_processed.pkl")
     print("done.")
-    n = 10
+    n = 25
     for i in range(n):
         print(f"~> Generating article {i+1}/{n}...", end="", flush=True)
         article = generate_dark_article()
         print("done.")
         print(f"Generated article \"{article.title}\".")
-        #db.add_article(article, f"{i+1}/{n}")
+        db.add_article(article, f"{i+1}/{n}")
