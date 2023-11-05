@@ -30,6 +30,7 @@ class ArticleNPK: # NPK = No Primary Key, See database schema
                     "content": """
                     I will give you information about a news article.
                     You will rewrite the title to be about cheese.
+                    It must also reference the categories given.
                     Only respond with the title.
                     """.strip(),
                 },
