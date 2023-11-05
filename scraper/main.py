@@ -52,7 +52,7 @@ if __name__ == "__main__":
     for i, article in enumerate(top_stories):
         try:
             print(f"~> Processing article {i+1}/{len(top_stories)}.")
-            db.add_article(article)
+            db.add_article(article, f"{i+1}/{len(top_stories)}")
         except Exception as e:
             print(e)
             print("~> /!\\ Failed /!\\")
