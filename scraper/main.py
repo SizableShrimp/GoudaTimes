@@ -54,6 +54,6 @@ if __name__ == "__main__":
         article.cheesify()
         print("done.")
         print(f"~> Adding \"{article.title}\" to db...", end="", flush=True)
-        db.add_article(article, )
+        db.add_article(article, recreate=True)
         print("done.")
         break
