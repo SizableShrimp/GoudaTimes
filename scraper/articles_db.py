@@ -14,16 +14,9 @@ class ArticlesDb:
             host="net.tsuni.dev", port=52355,
             database="db",
         )
-        self.cursor = self.cnx.cursor()
-    
-    def regenerate_cursor(self):
-        self.cnx.commit()
-        self.cursor.close()
-        self.cursor = self.cnx.cursor()
 
     def cleanup(self):
         self.sync_already()
-        self.cursor.close()
         self.cnx.close()
 
     def sync_already(self):
@@ -42,7 +35,8 @@ class ArticlesDb:
         self.already.append(orighash)
 
     def add_article_unchecked(self, article: ArticleNPK):
-        self.cursor.execute(
+        cursor = self.cnx.cursor()
+        cursor.execute(
             """
             INSERT INTO Articles
             (
@@ -61,3 +55,5 @@ class ArticlesDb:
                 article.original_url, article.content,
             ),
         )
+        self.cnx.commit()
+        cursor.close()
