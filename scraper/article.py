@@ -1,4 +1,5 @@
 import os
+import json
 import openai
 
 from dataclasses import dataclass
@@ -30,15 +31,14 @@ class ArticleNPK: # NPK = No Primary Key, See database schema
                     "content": """
                     I will give you information about a news article.
                     You will rewrite the title to be about cheese.
-                    It must also reference the categories given.
-                    No matter what, only respond with the title.
-                    Do not respond with categories, an abstract, or anything else.
-                    Give only a title.
+                    Crucially, it must also reference the categories given.
+                    No matter what, respond with only the title.
+                    Do not add any other information or formatting.
                     """.strip(),
                 },
                 {
                 "role": "user",
-                "content": self.generate_content_prompt(),
+                "content": self.generate_cheesy_title_prompt(),
                 }
             ],
             temperature=1,
@@ -61,15 +61,14 @@ class ArticleNPK: # NPK = No Primary Key, See database schema
                     "content": """
                     I will give the title and some other information about a news article.
                     Write the article.
-                    It should be about cheese, but should also reference the categories given.
-                    No matter what, only respond with the content of the article.
-                    Do not respond with the title, categories, an abstract, or anything else.
-                    Give only the article content.
+                    It should be about cheese, but absolutely must also reference the categories given.
+                    No matter what, respond with only the article content.
+                    Do not add any other information or formatting.
                     """.strip(),
                 },
                 {
                 "role": "user",
-                "content": self.title,
+                "content": self.generate_content_prompt(),
                 }
             ],
             temperature=1,
