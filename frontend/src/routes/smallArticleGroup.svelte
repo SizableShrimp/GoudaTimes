@@ -8,7 +8,7 @@
 </script>
 
 <div class="horizontal">
-    <ArticlePreview article={articles[0]} size={Sizes.extraLong} />
+    <ArticlePreview article={articles[0]} size={Sizes.extraLong} previewLen={150}/>
 </div>
 
 <style>
@@ -28,14 +28,14 @@
     .vertical-divider {
         /* height: 100%; */
         width: 1px;
-        background-color: #e3ba42;
+        background-color: var(--accent-color);
         margin: 0 1rem;
         align-self: stretch;
     }
     .article-divider {
         width: 100%;
         height: 1px;
-        background-color: #e3ba42;
+        background-color: var(--accent-color);
         margin: 0.5rem 0;
     }
     .small-content {

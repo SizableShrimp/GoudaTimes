@@ -1,19 +1,25 @@
 <script>
     import GoudaTimesImg from "../goudatimes.png";
+    import DarkModeSwitch from "./darkModeSwitch.svelte";
     const today = new Date();
-    const formatted = new Intl.DateTimeFormat("en-US", { dateStyle: "full" }).format(today);
+    const formatted = new Intl.DateTimeFormat("en-US", {
+        dateStyle: "full",
+    }).format(today);
 </script>
 
 <div class="centered-block">
-    <div class="sideline">
+    <div class="left">
         <strong>{formatted}</strong>
         <p>Volume 1, Issue 1</p>
     </div>
+    <div class="right">
+        <DarkModeSwitch/>
+    </div>
     <a href="/">
-        <img src={GoudaTimesImg} alt="">
+        <img src={GoudaTimesImg} alt="" />
     </a>
-    <div class="divider"></div>     
-    <div class="divider"></div>
+    <div class="divider" />
+    <div class="divider" />
 </div>
 
 <style>
@@ -27,15 +33,19 @@
         position: relative;
         padding: 1rem;
     }
-    .sideline {
+    .left {
         position: absolute;
         left: 1rem;
+    }
+    .right {
+        position: absolute;
+        right: 1rem;
     }
     .divider {
         margin-top: 3px;
         width: 100%;
         height: 1px;
-        background-color: #e3ba42;
+        background-color: var(--accent-color);
     }
     img {
         height: 5rem;
