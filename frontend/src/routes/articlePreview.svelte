@@ -9,7 +9,7 @@
     }
     let title = article.title;
     if (title.length > 90) {
-        title = text.slice(0, 87) + "...";
+        title = title.slice(0, 87) + "...";
     }
     
 </script>
