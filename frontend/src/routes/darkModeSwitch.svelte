@@ -1,10 +1,12 @@
 <script>
     import { browser } from '$app/environment';
-    import { darkModeStore } from '../stores';
+    import { articleModeStore, darkModeStore } from '../stores';
 
+    let isArticleMode = false;
     let darkMode = false;
     if (browser) {
         darkMode = document.body.classList.contains('dark') || localStorage.theme === "dark";
+        isArticleMode = document.URL.includes("/articles/");
     }
 	
 	function toggle() {
@@ -13,16 +15,22 @@
         localStorage.theme =  darkMode ? "dark" : "light";
         darkModeStore.set(darkMode);
     }
+
+    articleModeStore.subscribe(x => {
+        isArticleMode = x;
+    });
 </script>
 
 
-<button on:click={toggle}>
-	{#if darkMode }
-		☀️
-	{:else}
-		🌙
-	{/if}
-</button>
+{#if !isArticleMode}
+    <button on:click={toggle}>
+        {#if darkMode }
+            ☀️
+        {:else}
+            🌙
+        {/if}
+    </button>
+{/if}
 
 <style>
 	:root{

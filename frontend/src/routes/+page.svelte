@@ -1,6 +1,6 @@
 <script>
     import { onMount } from "svelte";
-    import { darkModeStore } from "../stores";
+    import { articleModeStore, darkModeStore } from "../stores";
     import BigArticleGroup from "./bigArticleGroup.svelte";
     import MediumArticleGroup from "./mediumArticleGroup.svelte";
     import SmallArticleGroup from "./smallArticleGroup.svelte";
@@ -12,6 +12,7 @@
         darkModeStore.subscribe((value) => {
             isDark = value;
         });
+        articleModeStore.set(false);
     });
     let groups;
     $: {

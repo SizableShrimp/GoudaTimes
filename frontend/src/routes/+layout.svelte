@@ -1,13 +1,16 @@
 <script>
     import { browser } from '$app/environment';
     import '../app.css'
-    import { darkModeStore } from '../stores';
+    import { darkModeStore, articleModeStore } from '../stores';
     import Footer from './footer.svelte';
     import Header from './header.svelte';
     let isDark = false;
+    let isArticleMode = false;
     if (browser) {
         isDark = document.body.classList.contains('dark');
+        isArticleMode = document.URL.includes("/articles/");
         darkModeStore.set(isDark);
+        articleModeStore.set(isArticleMode);
     }
 </script>
 
