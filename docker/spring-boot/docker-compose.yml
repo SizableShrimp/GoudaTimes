@@ -6,12 +6,17 @@ services:
     container_name: spring-boot
     restart: unless-stopped
     command: java -jar spring-boot.jar
-    ports:
-      - target: 8081
-        published: 8081
-        protocol: tcp
-        mode: host
+#    ports:
+#      - target: 8081
+#        published: 8081
+#        protocol: tcp
+#        mode: host
     volumes:
-      - /home/cheddar/spring-boot.jar:/spring-boot.jar
+      - /home/chez/spring-boot.jar:/spring-boot.jar
       # Holds spring.datasource.password
-      - /home/cheddar/secrets/mysql_user_password.txt:/spring/config/spring/datasource/password:ro
+      - /home/chez/secrets/mysql_user_password.txt:/spring/config/spring/datasource/password:ro
+
+networks:
+  default:
+    name: "nginx_internal"
+    external: true
