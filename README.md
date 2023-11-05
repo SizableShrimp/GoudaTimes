@@ -2,7 +2,7 @@
 
 ### Try out the demo at https://thegoudatimes.sizableshrimp.me
 
-A silly project which takes current event articles and turns them into articles about cheese!
+A silly project which takes current event articles (from the New York Times API) and turns them into articles about cheese!
 We used ChatGPT for title and article generation, Spring Boot for the backend, and Svelte for the frontend.
 Python is used for AI prompting and article interaction.
 A MySQL DB is used to store cheesified articles.
