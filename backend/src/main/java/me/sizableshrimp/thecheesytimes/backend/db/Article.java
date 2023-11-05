@@ -77,7 +77,7 @@ public class Article {
 
         // Fix when ChatGPT trails off its response.
         if (content.charAt(content.length() - 1) != '.') {
-            result = content.substring(content.lastIndexOf('.') + 1);
+            result = content.substring(0, content.lastIndexOf('.') + 1);
         }
 
         return result;
