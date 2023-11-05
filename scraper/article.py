@@ -80,6 +80,17 @@ class ArticleNPK: # NPK = No Primary Key, See database schema
         )
         self.content = response["choices"][0]["message"]["content"]
     
+    def fix_title(self):
+        for tstr in ("title:", "title: "):
+            if self.title.lower().startswith(tstr):
+                self.title = self.title[len(tstr):]
+        self.title = self.title.split('\n')[0]
+
     def cheesify(self):
+        print("[[t", end="", flush=True)
         self.generate_cheesy_title()
+        print("]", end="", flush=True)
+        self.fix_title()
+        print("][c", end="", flush=True)
         self.generate_content()
+        print("]", end="", flush=True)

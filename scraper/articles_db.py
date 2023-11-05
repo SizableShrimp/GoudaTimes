@@ -3,6 +3,7 @@ import pickle as pkl
 import json
 import os
 import hashlib
+from dataclasses import asdict
 
 from article import ArticleNPK
 
@@ -30,24 +31,31 @@ class ArticlesDb:
             with open(self.already_processed_filename, "wb") as f:
                 pkl.dump(self.already, f)
         else:
-            with open(self.already_processed_filename, "rb") as f:
-                self.already = pkl.load(f)
+            try:
+                with open(self.already_processed_filename, "rb") as f:
+                    self.already = pkl.load(f)
+            except:
+                with open(self.already_processed_filename, "wb") as f:
+                    print("Clearing already processed file.")
+                    pkl.dump(set(), f)
+                self.already = set()
 
-    def add_article(self, article: ArticleNPK, recreate: bool = False):
+    def add_article(self, article_orig: ArticleNPK, ref: str = "?", recreate: bool = False):
+        article = ArticleNPK(**asdict(article_orig))
         orighash = actually_hash(article.original_url)
         if orighash in self.already and not recreate:
-            print("<already processed>")
+            print(f"<already processed article {ref}>")
             return
         print(f"~> Cheesifying \"{article.title}\"...", end="", flush=True)
-        cheesified = article.cheesify()
+        article.cheesify()
         print("done.")
         print(f"~> Adding \"{article.title}\" to db...", end="", flush=True)
-        self.add_article_unchecked(cheesified)
+        self.add_article_unchecked(article)
         print("done.")
         print(f"~> Synchronizing list of already-processed articles...", end="", flush=True)
-        self.already.append(orighash)
+        self.already.add(orighash)
         self.sync_already()
-        print("done.")
+        print(f"~> Done processing article {ref}.")
 
     def add_article_unchecked(self, article: ArticleNPK):
         cursor = self.cnx.cursor()
