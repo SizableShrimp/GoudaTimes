@@ -88,7 +88,7 @@ class ArticleNPK: # NPK = No Primary Key, See database schema
         self.title = self.title.split('\n')[0]
 
     def cheesify(self):
-        if skip_cheesify:
+        if self.skip_cheesify:
             return
         print("[[t", end="", flush=True)
         self.generate_cheesy_title()
