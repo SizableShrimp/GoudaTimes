@@ -69,11 +69,18 @@ public class Article {
     }
 
     private static String sanitizeContent(String title, String content) {
+        String result = content;
+
         if (content.startsWith(title)) {
-            return content.substring(title.length()).trim();
+            result = content.substring(title.length()).trim();
         }
 
-        return content;
+        // Fix when ChatGPT trails off its response.
+        if (content.charAt(content.length() - 1) != '.') {
+            result = content.substring(content.lastIndexOf('.') + 1);
+        }
+
+        return result;
     }
 
     public Article copy() {
