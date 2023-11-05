@@ -52,12 +52,7 @@ if __name__ == "__main__":
     for i, article in enumerate(top_stories):
         try:
             print(f"~> Processing article {i+1}/{len(top_stories)}.")
-            print(f"~> Cheesifying \"{article.title}\"...", end="", flush=True)
-            article.cheesify()
-            print("done.")
-            print(f"~> Adding \"{article.title}\" to db...", end="", flush=True)
-            db.add_article(article, recreate=True)
-            print("done.")
+            db.add_article(article)
         except Exception as e:
             print(e)
             print("~> /!\\ Failed /!\\")
