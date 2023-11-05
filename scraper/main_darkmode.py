@@ -1,3 +1,4 @@
+import openai
 import os
 
 from article import ArticleNPK
@@ -47,7 +48,7 @@ def generate_dark_article_content(title: str):
             }
         ],
         temperature=1,
-        max_tokens=1000,
+        max_tokens=256,
         top_p=1,
         frequency_penalty=0,
         presence_penalty=0
@@ -74,7 +75,7 @@ def generate_dark_article() -> ArticleNPK:
 
 if __name__ == "__main__":
     print("~> Setting up database connection...", end="", flush=True)
-    db = ArticlesDb("already_processed.pkl")
+    #db = ArticlesDb("already_processed.pkl")
     print("done.")
     n = 10
     for i in range(n):
@@ -82,4 +83,4 @@ if __name__ == "__main__":
         article = generate_dark_article()
         print("done.")
         print(f"Generated article \"{article.title}\".")
-        db.add_article(article, f"{i+1}/{n}")
+        #db.add_article(article, f"{i+1}/{n}")
