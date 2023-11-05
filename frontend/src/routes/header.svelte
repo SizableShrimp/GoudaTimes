@@ -9,7 +9,9 @@
         <strong>{formatted}</strong>
         <p>Volume 1, Issue 1</p>
     </div>
-    <img src={GoudaTimesImg} alt="">
+    <a href="/">
+        <img src={GoudaTimesImg} alt="">
+    </a>
     <div class="divider"></div>     
     <div class="divider"></div>
 </div>

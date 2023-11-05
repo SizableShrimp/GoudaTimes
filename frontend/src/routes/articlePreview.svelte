@@ -1,21 +1,19 @@
 <script lang="ts">
-    enum sizes {
-        small,
-        long,
-        big
-    }
-    export let title: string = "Cheesed again";
-    export let text: string = "Lorem ipsum dolor sit amet";
-    export let link: string = "#";
-    export let image: string = "https://picsum.photos/200";
-    export let size: sizes = sizes.big;
-    if (text.length > 100) {
-        text = text.slice(0, 100) + "...";
+    import { Sizes, type Article } from "$lib/article";
+    export let article: Article;
+    export let previewLen = 100;
+    export let size: Sizes = Sizes.small;
+    let text = article.content;
+    if (text.length > previewLen) {
+        text = text.slice(0, 97) + "...";
     }
 </script>
 
-<a href={link}>
-    <h2>{title}</h2>
+<a href={"/articles/" + article.id}>
+    {#if size === Sizes.image}
+        <img src={article.headerImageUrl} alt={article.headerImageAttribution}/>
+    {/if}
+    <h2>{article.title}</h2>
     <p>{text}</p>
 </a>
 
