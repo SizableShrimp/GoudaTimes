@@ -45,4 +45,10 @@
     .small-content {
         flex-grow: 1;
     }
+    @media (max-width: 60rem) {
+        .horizontal {
+            display: flex;
+            flex-direction: column;
+        }
+    }
 </style>

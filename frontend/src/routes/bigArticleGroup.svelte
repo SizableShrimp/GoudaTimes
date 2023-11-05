@@ -82,6 +82,7 @@
     }
     @media (max-width: 60rem) {
         .horizontal {
+            display: flex;
             flex-direction: column;
         }
         .vertical-divider {
