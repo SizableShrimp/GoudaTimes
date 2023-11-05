@@ -12,7 +12,7 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 public class ApiExceptionHandler {
     @ExceptionHandler(NoHandlerFoundException.class)
     public ResponseEntity<ApiErrorResponse> handleNoHandlerFoundException(NoHandlerFoundException ex, HttpServletRequest httpServletRequest) {
-        ApiErrorResponse apiErrorResponse = new ApiErrorResponse(404, "Resource not found");
+        ApiErrorResponse apiErrorResponse = ApiErrorResponse.resourceNotFound();
         return ResponseEntity.status(HttpStatus.NOT_FOUND).contentType(MediaType.APPLICATION_JSON).body(apiErrorResponse);
     }
 }
