@@ -57,3 +57,6 @@ if __name__ == "__main__":
         db.add_article(article, recreate=True)
         print("done.")
         break
+    print(f"~> Cleaning up database connection...", end="", flush=True)
+    db.cleanup()
+    print("done.")
