@@ -1,5 +1,6 @@
 package me.sizableshrimp.thecheesytimes.backend.db;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,6 +10,7 @@ import jakarta.persistence.Table;
 
 @Entity // This tells Hibernate to make a table out of this class
 @Table(name = "Articles")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -56,6 +58,22 @@ public class Article {
             return content;
 
         return content.substring(0, content.lastIndexOf(' ')) + "...";
+    }
+
+    public Article sanitize() {
+        Article copy = this.copy();
+
+        copy.setContent(sanitizeContent(this.title, this.content));
+
+        return copy;
+    }
+
+    private static String sanitizeContent(String title, String content) {
+        if (content.startsWith(title)) {
+            return content.substring(title.length()).trim();
+        }
+
+        return content;
     }
 
     public Article copy() {
