@@ -1,6 +1,7 @@
 import mysql.connector
 import pickle as pkl
 import json
+import os
 
 from article import ArticleNPK
 
@@ -54,7 +55,7 @@ class ArticlesDb:
             )
             """.strip(),
             (
-                article.title, article.date_written, article.header_image_url,
+                article.title, article.date_written, article.by_line, article.header_image_url,
                 article.header_image_attribution, article.source_domain,
                 json.dumps(article.sorted_categories),
                 article.original_url, article.content,
