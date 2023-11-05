@@ -6,7 +6,7 @@ services:
     container_name: mysql
     restart: unless-stopped
     env_file:
-      - passwords.env
+      - setup.env
     ports:
       - target: 3306
         published: 52355

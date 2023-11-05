@@ -1,4 +1,4 @@
 # Backend
 cd backend
-./gradlew bootRun
+env $(cat .env | xargs) ./gradlew bootRun
 cd ..
