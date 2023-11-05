@@ -2,8 +2,14 @@ import mysql.connector
 import pickle as pkl
 import json
 import os
+import hashlib
 
 from article import ArticleNPK
+
+def actually_hash(s: str) -> bytes:
+    hasher = hashlib.sha256()
+    hasher.update(s.encode('utf-8'))
+    return hasher.digest()
 
 class ArticlesDb:
     def __init__(self, already_processed_filename: str):
@@ -28,11 +34,20 @@ class ArticlesDb:
                 self.already = pkl.load(f)
 
     def add_article(self, article: ArticleNPK, recreate: bool = False):
-        orighash = hash(article.original_url)
+        orighash = actually_hash(article.original_url)
         if orighash in self.already and not recreate:
+            print("<already processed>")
             return
-        self.add_article_unchecked(article)
+        print(f"~> Cheesifying \"{article.title}\"...", end="", flush=True)
+        cheesified = article.cheesify()
+        print("done.")
+        print(f"~> Adding \"{article.title}\" to db...", end="", flush=True)
+        self.add_article_unchecked(cheesified)
+        print("done.")
+        print(f"~> Synchronizing list of already-processed articles...", end="", flush=True)
         self.already.append(orighash)
+        self.sync_already()
+        print("done.")
 
     def add_article_unchecked(self, article: ArticleNPK):
         cursor = self.cnx.cursor()

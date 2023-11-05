@@ -30,10 +30,11 @@ class ArticleNPK: # NPK = No Primary Key, See database schema
                     "role": "system",
                     "content": """
                     I will give you information about a news article.
-                    You will rewrite the title to be about cheese.
-                    Crucially, it must also reference the categories given.
+                    You will rewrite the title to be about cheese, but ensure it is about the same topic.
+                    It must reference the categories given.
                     No matter what, respond with only the title.
                     Do not add any other information or formatting.
+                    Do not respond with categories.
                     """.strip(),
                 },
                 {
