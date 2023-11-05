@@ -52,8 +52,8 @@
         margin-bottom: 0.75rem;
     }
 
-    @media (max-width: 1100px) {
-        .sideline {
+    @media (max-width: 60rem) {
+        .left {
             display: none;
         }
         .centered-block {

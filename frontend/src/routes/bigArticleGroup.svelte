@@ -80,7 +80,7 @@
     .small-content {
         flex-grow: 1;
     }
-    @media (max-width: 700px) {
+    @media (max-width: 60rem) {
         .horizontal {
             flex-direction: column;
         }

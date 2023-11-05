@@ -1,6 +1,7 @@
 <script>
     import { onMount } from 'svelte';
     import { darkModeStore } from '../../../stores';
+    import Paywall from './paywall.svelte';
     /** @type {import('./$types').PageData} */
 	export let data;
     const formatted = new Intl.DateTimeFormat("en-US", { dateStyle: "full" }).format(new Date(data.article.dateWritten));
@@ -26,10 +27,14 @@
         <a href={data.article.originalUrl}>Via the New York Times</a>
     {/if}
 </div>
+<Paywall />
 
 <style>
     .article {
         max-width: 50rem;
         margin: auto;
+    }
+    p {
+        margin-bottom: 1rem;
     }
 </style>
