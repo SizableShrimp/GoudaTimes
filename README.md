@@ -1,6 +1,6 @@
 # The Gouda Times aka. The Cheesy Times
 
-### Try out the demo at http://thegoudatimes.sizableshrimp.me
+### Try out the demo at https://thegoudatimes.sizableshrimp.me
 
 A silly project which takes current event articles and turns them into articles about cheese!
 We used ChatGPT for title and article generation, Spring Boot for the backend, and Svelte for the frontend.

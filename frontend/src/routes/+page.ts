@@ -1,4 +1,4 @@
-const baseURL = "http://thecheesytimes.sizableshrimp.me"
+const baseURL = "https://thegoudatimes.sizableshrimp.me"
 /** @type {import('./$types').PageLoad} */
 export async function load({fetch}) {
     const data = await fetch(baseURL + "/api/articles?filterDomain=nytimes.com").then(r => r.json()) as import('$lib/article').Article[];

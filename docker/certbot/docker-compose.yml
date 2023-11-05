@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - /home/chez/certbot/conf:/etc/letsencrypt:rw
+      - /home/chez/www/certbot:/var/www/certbot:rw
+
+networks:
+  default:
+    name: "nginx_internal"
+    external: true
