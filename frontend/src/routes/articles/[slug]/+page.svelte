@@ -1,6 +1,6 @@
 <script>
     import { onMount } from 'svelte';
-    import { darkModeStore } from '../../../stores';
+    import { articleModeStore, darkModeStore } from '../../../stores';
     import Paywall from './paywall.svelte';
     /** @type {import('./$types').PageData} */
 	export let data;
@@ -10,6 +10,7 @@
         darkModeStore.subscribe((value) => {
             isDark = value;
         });
+        articleModeStore.set(true);
     });
 </script>
 
