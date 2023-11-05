@@ -5,6 +5,7 @@ services:
     image: "node:21-bullseye"
     container_name: "node"
     user: "node"
+    restart: unless-stopped
     working_dir: /home/node/app
     environment:
       - NODE_ENV=production
