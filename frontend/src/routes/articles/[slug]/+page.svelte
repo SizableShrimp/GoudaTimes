@@ -16,6 +16,7 @@
 <div class="article">
     <h1>{data.article.title}</h1>
     <i>{formatted}</i>
+    <p>{data.article.byLine} <a href="/about"><small>Not really</small></a></p>
     {#if data.article.headerImageUrl}
         <img src={data.article.headerImageUrl} alt={data.article.headerImageAttribution}/>
         <small>{data.article.headerImageAttribution}</small>
@@ -23,11 +24,11 @@
     {#each data.article.content.split("\n") as paragraph}
         <p>{paragraph}</p>
     {/each}
-    {#if !isDark}
-        <a href={data.article.originalUrl}>Via the New York Times</a>
-    {/if}
 </div>
 <Paywall />
+{#if !isDark}
+<a class="attr" href={data.article.originalUrl}>Via the New York Times</a>
+{/if}
 
 <style>
     .article {
@@ -36,5 +37,11 @@
     }
     p {
         margin-bottom: 1rem;
+    }
+    .attr {
+        display: block;
+        text-align: center;
+        margin-top: 1rem;
+        color: var(--color);
     }
 </style>
