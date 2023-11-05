@@ -74,7 +74,7 @@ class ArticleNPK: # NPK = No Primary Key, See database schema
                 }
             ],
             temperature=1,
-            max_tokens=1000,
+            max_tokens=256,
             top_p=1,
             frequency_penalty=0,
             presence_penalty=0
