@@ -1,3 +1,5 @@
 package me.sizableshrimp.thecheesytimes.backend.db;
 
-public interface ArticleRepository extends ReadOnlyRepository<Article, Integer> {}
+import org.springframework.data.repository.PagingAndSortingRepository;
+
+public interface ArticleRepository extends ReadOnlyRepository<Article, Integer>, PagingAndSortingRepository<Article, Integer> {}

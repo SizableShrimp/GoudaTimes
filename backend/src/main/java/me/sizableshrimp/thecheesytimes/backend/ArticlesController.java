@@ -2,6 +2,7 @@ package me.sizableshrimp.thecheesytimes.backend;
 
 import me.sizableshrimp.thecheesytimes.backend.db.Article;
 import me.sizableshrimp.thecheesytimes.backend.db.ArticleRepository;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,8 +24,8 @@ public class ArticlesController {
     }
 
     @GetMapping("")
-    public @ResponseBody Iterable<Article> index() {
-        return this.articleRepository.findAll();
+    public @ResponseBody Iterable<Article> index(Pageable pageable) {
+        return () -> this.articleRepository.findAll(pageable).stream().map(Article::shrink).iterator();
     }
 
     @GetMapping("/{id}")

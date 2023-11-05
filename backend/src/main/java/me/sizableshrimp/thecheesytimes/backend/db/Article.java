@@ -42,6 +42,39 @@ public class Article {
     @Column(name = "Content", columnDefinition = "TEXT", nullable = false)
     private String content;
 
+    public Article shrink() {
+        Article copy = this.copy();
+
+        copy.setContent(truncateContent(this.content, 200));
+        copy.setSortedCategoriesJson(null);
+
+        return copy;
+    }
+
+    private static String truncateContent(String content, int maxLength) {
+        if (content.length() <= maxLength)
+            return content;
+
+        return content.substring(0, content.lastIndexOf(' ')) + "...";
+    }
+
+    public Article copy() {
+        Article copy = new Article();
+
+        copy.setId(this.id);
+        copy.setTitle(this.title);
+        copy.setDateWritten(this.dateWritten);
+        copy.setByLine(this.byLine);
+        copy.setHeaderImageUrl(this.headerImageUrl);
+        copy.setHeaderImageAttribution(this.headerImageAttribution);
+        copy.setSourceDomain(this.sourceDomain);
+        copy.setSortedCategoriesJson(this.sortedCategoriesJson);
+        copy.setOriginalUrl(this.originalUrl);
+        copy.setContent(this.content);
+
+        return copy;
+    }
+
     public Integer getId() {
         return this.id;
     }
