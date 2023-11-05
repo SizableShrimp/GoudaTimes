@@ -1,6 +1,6 @@
 # The Gouda Times aka. The Cheesy Times
 
-### Try out the demo at https://thegoudatimes.sizableshrimp.me
+### Try out the demo at https://gouda.tsuni.dev/
 
 A silly project which takes current event articles (from the New York Times API) and turns them into articles about cheese!
 We used ChatGPT for title and article generation, Spring Boot for the backend, and Svelte for the frontend.
