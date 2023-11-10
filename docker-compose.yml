@@ -43,13 +43,16 @@ services:
     networks:
       - default
       - web
-#  we'll run it via a cron job for now, so no need to include it here.
-#  scraper:
-#    build:
-#      context: ./scraper
-#      dockerfile: ./Dockerfile
-#    container_name: "goudascraper"
-#    env_file: .env
+  scraper:
+    build:
+      context: ./scraper
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./scraper:/app # it relies on the already_processed.pkl file, I think.
+    container_name: "goudascraper"
+    # we'll run it via a cron job for now, so no need for restart policy
+    # docker compose up scraper
+    env_file: .env
 networks:
   default:
   web:
