@@ -40,7 +40,8 @@ def get_top_stories() -> list[ArticleNPK]:
             result["url"],
             "<< not yet generated >>",
         ))
-    return ret
+    # simple hack to only generate 2 articles each run
+    return ret[0:2]
 
 if __name__ == "__main__":
     print("~> Setting up database connection...", end="", flush=True)

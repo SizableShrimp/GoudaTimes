@@ -1,0 +1,56 @@
+version: "3.9"
+
+services:
+  mysql:
+    image: mysql:8.0.35-debian
+    restart: unless-stopped
+    env_file:
+      - docker/mysql/setup.env
+    expose:
+      - 3306:52355
+    command: --init-file /data/application/init.sql
+    volumes:
+      # Hosted on the server & on Notion
+      - ../init.sql:/data/application/init.sql:ro
+      # Hosted on the server
+      - ../db:/var/lib/mysql
+      # Secrets
+      - ../secrets/mysql_user_password.txt:/run/secrets/mysql_user_password:ro
+      - ../secrets/mysql_root_password.txt:/run/secrets/mysql_root_password:ro
+  node:
+    build:
+      context: ./frontend
+      dockerfile: ./Dockerfile
+    #ports:
+    #  - 3000:3000
+    container_name: "goudanode"
+    user: "nodejs"
+    restart: unless-stopped
+    networks:
+      - default
+      - web
+  spring-boot:
+    image: eclipse-temurin:17-jdk-alpine
+    restart: unless-stopped
+    command: java -jar spring-boot.jar
+    container_name: "goudaspring"
+    ports:
+      - 8081:8081
+    volumes:
+      - ../spring-boot.jar:/spring-boot.jar
+      # Holds spring.datasource.password
+      - ../secrets/mysql_user_password.txt:/spring/config/spring/datasource/password:ro
+    networks:
+      - default
+      - web
+#  we'll run it via a cron job for now, so no need to include it here.
+#  scraper:
+#    build:
+#      context: ./scraper
+#      dockerfile: ./Dockerfile
+#    container_name: "goudascraper"
+#    env_file: .env
+networks:
+  default:
+  web:
+    external: true
