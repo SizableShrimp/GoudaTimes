@@ -1,4 +1,4 @@
-# The Gouda Times aka. The Cheesy Times
+# Gouda Times
 
 ### Try out the demo at https://gouda.tsuni.dev/
 
